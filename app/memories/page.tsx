@@ -4,6 +4,7 @@ export default function Home() {
       <h1 className="text-5xl font-bold mb-4 text-gray-800">
         Memory Bridge
       </h1>
+
       <p className="text-lg text-gray-600 mb-8">
         Lưu giữ những kỷ niệm của bạn
       </p>
