@@ -1,6 +1,7 @@
 "use client"
 
 import { signIn } from "next-auth/react"
+import { supabase } from "../../lib/supabase";
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
