@@ -6,7 +6,7 @@ export default function HomePage() {
 
       {/* HERO */}
       <section className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-black via-gray-900 to-black">
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
           Lưu giữ câu chuyện cuộc đời
         </h1>
         <p className="text-gray-400 max-w-2xl mb-10 text-lg">
@@ -14,21 +14,13 @@ export default function HomePage() {
           của người thân một cách trang trọng và bền vững.
         </p>
 
-        <div className="flex gap-6">
-          <Link
-            href="/create-profile"
-            className="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 transition duration-300 shadow-lg"
-          >
-            Bắt đầu kể chuyện
-          </Link>
-
-          <Link
-            href="/dashboard"
-            className="px-8 py-3 rounded-xl border border-white/20 hover:bg-white/10 transition duration-300"
-          >
-            Xem hồ sơ mẫu
-          </Link>
-        </div>
+        {/* Chỉ còn 1 nút */}
+        <Link
+          href="/create-profile"
+          className="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 transition duration-300 shadow-lg"
+        >
+          Bắt đầu kể chuyện
+        </Link>
       </section>
 
       {/* VẤN ĐỀ */}
