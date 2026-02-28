@@ -21,7 +21,7 @@ export default function CreateProfile() {
   ];
 
   const years = Array.from(
-    { length: 80 },
+    { length: 110 },
     (_, i) => new Date().getFullYear() - i
   );
 
