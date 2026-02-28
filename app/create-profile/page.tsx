@@ -20,8 +20,10 @@ export default function CreateProfile() {
     "Tháng 9","Tháng 10","Tháng 11","Tháng 12",
   ];
 
+  const MAX_AGE = 110;
+
   const years = Array.from(
-    { length: 110 },
+    { length: MAX_AGE },
     (_, i) => new Date().getFullYear() - i
   );
 
