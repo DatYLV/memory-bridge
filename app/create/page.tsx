@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
-console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
 export default function CreatePage() {
   const [title, setTitle] = useState("");
@@ -11,19 +10,41 @@ export default function CreatePage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // 🔥 Kiểm tra đăng nhập khi vào trang
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data } = await supabase.auth.getUser();
+
+      if (!data.user) {
+        router.push("/login");
+      }
+    };
+
+    checkUser();
+  }, []);
+
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      router.push("/login");
+      return;
+    }
 
     const { error } = await supabase.from("memories").insert([
       {
         title,
         content,
+        user_id: user.id, // 🔥 lưu theo user
       },
     ]);
 
     if (error) {
       alert("Có lỗi xảy ra!");
+      console.error(error);
     } else {
       router.push("/memories");
     }
@@ -41,7 +62,6 @@ export default function CreatePage() {
 
         <form onSubmit={handleCreate} className="flex flex-col gap-6">
           
-          {/* Title */}
           <div>
             <label className="block mb-2 text-sm text-gray-400">
               Title
@@ -56,7 +76,6 @@ export default function CreatePage() {
             />
           </div>
 
-          {/* Content */}
           <div>
             <label className="block mb-2 text-sm text-gray-400">
               Content
@@ -71,7 +90,6 @@ export default function CreatePage() {
             />
           </div>
 
-          {/* Button */}
           <button
             type="submit"
             disabled={loading}
