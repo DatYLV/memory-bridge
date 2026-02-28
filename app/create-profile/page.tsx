@@ -25,7 +25,6 @@ export default function CreateProfile() {
     (_, i) => new Date().getFullYear() - i
   );
 
-  // 🔥 Tính số ngày theo tháng + năm
   const getDaysInMonth = (month: number, year: number) => {
     return new Date(year, month, 0).getDate();
   };
@@ -43,7 +42,6 @@ export default function CreateProfile() {
         )
       : [];
 
-  // 🔥 Nếu đổi tháng/năm làm ngày sai → reset
   useEffect(() => {
     if (birthDay && birthMonth && birthYear) {
       const maxDays = getDaysInMonth(
@@ -63,12 +61,19 @@ export default function CreateProfile() {
       return;
     }
 
+    if (!birthDay || !birthMonth || !birthYear) {
+      alert("Vui lòng chọn đầy đủ ngày tháng năm sinh");
+      return;
+    }
+
     setLoading(true);
 
     const { error } = await supabase.from("profiles").insert([
       {
         full_name: fullName,
-        birth_year: birthYear ? parseInt(birthYear) : null,
+        birth_day: parseInt(birthDay),
+        birth_month: parseInt(birthMonth),
+        birth_year: parseInt(birthYear),
         hometown: hometown || null,
         bio: bio || null,
       },
@@ -132,7 +137,6 @@ export default function CreateProfile() {
           Tạo Hồ Sơ
         </h1>
 
-        {/* Họ tên */}
         <div style={{ marginBottom: 18 }}>
           <label style={{ display: "block", marginBottom: 6 }}>
             Họ tên
@@ -144,14 +148,12 @@ export default function CreateProfile() {
           />
         </div>
 
-        {/* Ngày sinh */}
         <div style={{ marginBottom: 18 }}>
           <label style={{ display: "block", marginBottom: 6 }}>
             Ngày sinh
           </label>
 
           <div style={{ display: "flex", gap: 10 }}>
-            {/* Ngày */}
             <select
               value={birthDay}
               onChange={(e) => setBirthDay(e.target.value)}
@@ -166,7 +168,6 @@ export default function CreateProfile() {
               ))}
             </select>
 
-            {/* Tháng */}
             <select
               value={birthMonth}
               onChange={(e) => setBirthMonth(e.target.value)}
@@ -180,7 +181,6 @@ export default function CreateProfile() {
               ))}
             </select>
 
-            {/* Năm */}
             <select
               value={birthYear}
               onChange={(e) => setBirthYear(e.target.value)}
@@ -196,7 +196,6 @@ export default function CreateProfile() {
           </div>
         </div>
 
-        {/* Quê quán */}
         <div style={{ marginBottom: 18 }}>
           <label style={{ display: "block", marginBottom: 6 }}>
             Quê quán
@@ -209,7 +208,6 @@ export default function CreateProfile() {
           />
         </div>
 
-        {/* Giới thiệu */}
         <div style={{ marginBottom: 25 }}>
           <label style={{ display: "block", marginBottom: 6 }}>
             Giới thiệu
