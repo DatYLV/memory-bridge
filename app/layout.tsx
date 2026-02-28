@@ -16,10 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body className={inter.className}>
-        <Navbar />
-        {children}
-      </body>
+      <body className={`${inter.className} bg-black text-white`}>
+  <Navbar />
+  <div className="pt-">
+    {children}
+  </div>
+</body>
     </html>
   );
 }

@@ -1,98 +1,97 @@
-"use client";
+import Link from "next/link";
 
-import { motion } from "framer-motion";
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="relative min-h-screen bg-gradient-to-b from-[#0f0f14] to-black text-gray-200 px-6 py-24 flex flex-col items-center overflow-hidden">
+    <main className="bg-black text-white">
 
-      {/* Background glow */}
-      <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px]"></div>
-
-      <div className="relative max-w-4xl text-center">
-
-        {/* Badge */}
-        <p className="text-purple-400 text-sm mb-4 tracking-widest uppercase">
-          Lưu trữ ký ức thông minh
-        </p>
-
-        <h1 className="text-5xl md:text-6xl font-semibold leading-tight mb-6">
-          Lưu giữ những{" "}
-          <span className="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
-            kỷ niệm quan trọng nhất
-          </span>
+      {/* HERO */}
+      <section className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-black via-gray-900 to-black">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+          Lưu giữ câu chuyện cuộc đời
         </h1>
-
-        <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
-          Memory Bridge giúp bạn lưu lại những khoảnh khắc đáng nhớ
-          một cách đơn giản, hiện đại và an toàn.
+        <p className="text-gray-400 max-w-2xl mb-10 text-lg">
+          Memory Bridge giúp bạn ghi lại ký ức, câu chuyện và di sản
+          của người thân một cách trang trọng và bền vững.
         </p>
 
-        <div className="flex justify-center gap-6 mb-24">
-          <a
-            href="/create"
-            className="px-8 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 hover:scale-105 transition duration-300 shadow-lg shadow-purple-500/20"
+        <div className="flex gap-6">
+          <Link
+            href="/create-profile"
+            className="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 transition duration-300 shadow-lg"
           >
-            Bắt đầu ngay
-          </a>
+            Bắt đầu kể chuyện
+          </Link>
 
-          <a
-            href="/memories"
-            className="px-8 py-3 rounded-2xl border border-white/20 hover:bg-white/10 transition duration-300"
+          <Link
+            href="/dashboard"
+            className="px-8 py-3 rounded-xl border border-white/20 hover:bg-white/10 transition duration-300"
           >
-            Xem kỷ niệm
-          </a>
+            Xem hồ sơ mẫu
+          </Link>
         </div>
-      </div>
+      </section>
 
-      {/* Features */}
-      <div className="grid md:grid-cols-3 gap-8 max-w-5xl w-full">
-
-        {[
-          {
-            title: "Lưu trữ an toàn",
-            desc: "Dữ liệu được bảo mật và lưu trữ an toàn với Supabase.",
-          },
-          {
-            title: "Dễ sử dụng",
-            desc: "Giao diện trực quan, ai cũng có thể sử dụng.",
-          },
-          {
-            title: "Truy cập mọi lúc",
-            desc: "Xem lại những kỷ niệm của bạn bất cứ khi nào.",
-          },
-        ].map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            viewport={{ once: true }}
-            className="p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-purple-400/40 transition duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-500/10"
-          >
-            <h3 className="text-lg font-medium mb-3 text-white">
-              {item.title}
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              {item.desc}
-            </p>
-          </motion.div>
-        ))}
-
-      </div>
-
-      {/* Tech stack */}
-      <div className="mt-24 text-center">
-        <h2 className="text-2xl font-semibold mb-6">Tech Stack</h2>
-        <p className="text-gray-400">
-          Next.js • Supabase • TailwindCSS • Framer Motion
+      {/* VẤN ĐỀ */}
+      <section className="py-24 px-6 text-center bg-black">
+        <h2 className="text-3xl font-semibold mb-6">
+          Ký ức dần phai theo thời gian
+        </h2>
+        <p className="text-gray-400 max-w-3xl mx-auto">
+          Những câu chuyện quý giá của cha mẹ, ông bà có thể mất đi nếu
+          chúng ta không ghi lại. Thế hệ sau sẽ không còn cơ hội hiểu
+          rõ về nguồn gốc và hành trình của gia đình mình.
         </p>
-      </div>
+      </section>
 
-      {/* Footer */}
-      <footer className="mt-16 border-t border-white/10 pt-8 text-center text-gray-500 text-sm w-full">
-        Built by ThinkBot • 2026 • Memory Bridge
-      </footer>
+      {/* GIẢI PHÁP */}
+      <section className="py-24 px-6 bg-gradient-to-br from-gray-900 to-black text-center">
+        <h2 className="text-3xl font-semibold mb-6">
+          Một cây cầu nối giữa các thế hệ
+        </h2>
+        <p className="text-gray-400 max-w-3xl mx-auto">
+          Memory Bridge tạo ra không gian số để lưu giữ và chia sẻ
+          câu chuyện cá nhân một cách có cấu trúc và lâu dài.
+        </p>
+      </section>
+
+      {/* 4 BƯỚC HOẠT ĐỘNG */}
+      <section className="py-24 px-6 bg-black">
+        <h2 className="text-3xl font-semibold text-center mb-16">
+          Cách hoạt động
+        </h2>
+
+        <div className="grid md:grid-cols-4 gap-10 max-w-6xl mx-auto text-center">
+          {[
+            "Tạo hồ sơ",
+            "Thực hiện phỏng vấn",
+            "Lưu trữ câu chuyện",
+            "Chia sẻ cho gia đình",
+          ].map((step, index) => (
+            <div
+              key={index}
+              className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl"
+            >
+              <div className="text-4xl font-bold text-indigo-400 mb-4">
+                {index + 1}
+              </div>
+              <p className="text-gray-300">{step}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24 px-6 text-center bg-gradient-to-br from-indigo-900/40 to-purple-900/40">
+        <h2 className="text-4xl font-bold mb-6">
+          Bắt đầu lưu giữ di sản hôm nay
+        </h2>
+        <Link
+          href="/create-profile"
+          className="px-10 py-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 transition duration-300 shadow-lg text-lg"
+        >
+          Tạo hồ sơ đầu tiên
+        </Link>
+      </section>
 
     </main>
   );
