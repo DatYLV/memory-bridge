@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
 export default function CreateProfile() {
@@ -11,8 +11,6 @@ export default function CreateProfile() {
   const [hometown, setHometown] = useState("");
   const [bio, setBio] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
 
   const months = [
     "Tháng 1","Tháng 2","Tháng 3","Tháng 4",
@@ -26,6 +24,38 @@ export default function CreateProfile() {
     { length: MAX_AGE },
     (_, i) => new Date().getFullYear() - i
   );
+
+  // 🔥 Tính số ngày theo tháng + năm
+  const getDaysInMonth = (month: number, year: number) => {
+    return new Date(year, month, 0).getDate();
+  };
+
+  const days =
+    birthMonth && birthYear
+      ? Array.from(
+          {
+            length: getDaysInMonth(
+              parseInt(birthMonth),
+              parseInt(birthYear)
+            ),
+          },
+          (_, i) => i + 1
+        )
+      : [];
+
+  // 🔥 Nếu đổi tháng/năm làm ngày sai → reset
+  useEffect(() => {
+    if (birthDay && birthMonth && birthYear) {
+      const maxDays = getDaysInMonth(
+        parseInt(birthMonth),
+        parseInt(birthYear)
+      );
+
+      if (parseInt(birthDay) > maxDays) {
+        setBirthDay("");
+      }
+    }
+  }, [birthMonth, birthYear]);
 
   const handleSubmit = async () => {
     if (!fullName) {
@@ -121,10 +151,12 @@ export default function CreateProfile() {
           </label>
 
           <div style={{ display: "flex", gap: 10 }}>
+            {/* Ngày */}
             <select
               value={birthDay}
               onChange={(e) => setBirthDay(e.target.value)}
               style={inputStyle}
+              disabled={!birthMonth || !birthYear}
             >
               <option value="">Ngày</option>
               {days.map((day) => (
@@ -134,6 +166,7 @@ export default function CreateProfile() {
               ))}
             </select>
 
+            {/* Tháng */}
             <select
               value={birthMonth}
               onChange={(e) => setBirthMonth(e.target.value)}
@@ -147,6 +180,7 @@ export default function CreateProfile() {
               ))}
             </select>
 
+            {/* Năm */}
             <select
               value={birthYear}
               onChange={(e) => setBirthYear(e.target.value)}
