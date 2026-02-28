@@ -91,7 +91,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="mt-16 border-t border-white/10 pt-8 text-center text-gray-500 text-sm w-full">
-        Built by Bảo Duy • 2026 • Memory Bridge
+        Built by ThinkBot • 2026 • Memory Bridge
       </footer>
 
     </main>
